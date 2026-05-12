@@ -25,13 +25,21 @@
             </div><!-- End sidebar Categories -->  
             
             <h3 class="sidebar-title">Recent Posts</h3>
+            {% if recent_posts %}
             <div class="sidebar-item recent-posts">
-                <div class="post-item clearfix">
-                    <img src="{% static 'assets/img/blog/blog-recent-1.jpg' %}" alt="">
-                    <h4><a href="blog-single.html">combined with a handful of model sentence structures</a></h4>
-                    <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-            </div><!-- End sidebar recent posts -->
+                {% for post in recent_posts %}                    
+                    <div class="post-item clearfix">
+                        <a href="{% url 'post_detail' post.pk %}">
+                            <img src="{{ post.photo.url }}" alt="">
+                        </a>
+                        <h4><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h4>
+                        <time datetime="2020-01-01">{{ post.date }}</time>
+                    </div>
+                {% endfor %}
+            </div><!-- End sidebar recent posts -->                
+            {% else %}
+                <p>No post is available !</p>
+            {% endif %}
 
             <h3 class="sidebar-title">Tags</h3>
             <div class="sidebar-item tags">
