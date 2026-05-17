@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from datetime import date
 
 class Post(models.Model):
@@ -15,3 +16,9 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'pk': self.pk})
+    
+class Comment(models.Model):
+    author = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    body = models.TextField(null=False, blank=False)
+    date = models.DateTimeField(default=timezone.now)

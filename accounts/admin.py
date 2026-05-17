@@ -13,7 +13,8 @@ class CustomUserAdmin(UserAdmin):
         'email',
         'username',
         'age',
-        'is_staff',        
+        'is_staff',  
+        'photo',      
     ]
 
     fieldsets = UserAdmin.fieldsets + \
